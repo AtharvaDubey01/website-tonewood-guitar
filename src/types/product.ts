@@ -12,4 +12,12 @@ export interface Product {
   };
   imageUrl: string;
   additionalImages?: string[];
+  stock: number;
+  isNew?: boolean;
+  isFeatured?: boolean;
+  ratings?: {
+    average: number;
+    count: number;
+  };
+  relatedProducts?: string[];
 }

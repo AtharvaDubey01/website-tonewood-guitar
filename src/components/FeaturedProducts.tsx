@@ -10,8 +10,8 @@ interface FeaturedProductsProps {
 }
 
 const FeaturedProducts: React.FC<FeaturedProductsProps> = ({ products }) => {
-  // Take first 4 products for featured section
-  const featuredProducts = products.slice(0, 4);
+  // Take only the featured products
+  const featuredProducts = products.filter(product => product.isFeatured).slice(0, 4);
 
   return (
     <section className="py-16 bg-wood-dark/50">

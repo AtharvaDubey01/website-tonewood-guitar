@@ -29,7 +29,15 @@ export const products: Product[] = [
     additionalImages: [
       "/images/acoustic-sunburst-back.jpg",
       "/images/acoustic-sunburst-detail.jpg"
-    ]
+    ],
+    stock: 5,
+    isNew: false,
+    isFeatured: true,
+    ratings: {
+      average: 4.8,
+      count: 24
+    },
+    relatedProducts: ["4", "6"]
   },
   {
     id: "2",
@@ -58,7 +66,15 @@ export const products: Product[] = [
     additionalImages: [
       "/images/les-paul-custom-back.jpg",
       "/images/les-paul-custom-detail.jpg"
-    ]
+    ],
+    stock: 2,
+    isNew: true,
+    isFeatured: true,
+    ratings: {
+      average: 5.0,
+      count: 18
+    },
+    relatedProducts: ["3"]
   },
   {
     id: "3",
@@ -87,7 +103,15 @@ export const products: Product[] = [
     additionalImages: [
       "/images/stratocaster-back.jpg",
       "/images/stratocaster-detail.jpg"
-    ]
+    ],
+    stock: 8,
+    isNew: false,
+    isFeatured: true,
+    ratings: {
+      average: 4.7,
+      count: 32
+    },
+    relatedProducts: ["2"]
   },
   {
     id: "4",
@@ -116,7 +140,15 @@ export const products: Product[] = [
     additionalImages: [
       "/images/classical-guitar-back.jpg",
       "/images/classical-guitar-detail.jpg"
-    ]
+    ],
+    stock: 3,
+    isNew: false,
+    isFeatured: false,
+    ratings: {
+      average: 4.9,
+      count: 15
+    },
+    relatedProducts: ["1"]
   },
   {
     id: "5",
@@ -145,7 +177,15 @@ export const products: Product[] = [
     additionalImages: [
       "/images/jazz-bass-back.jpg",
       "/images/jazz-bass-detail.jpg"
-    ]
+    ],
+    stock: 4,
+    isNew: true,
+    isFeatured: false,
+    ratings: {
+      average: 4.6,
+      count: 12
+    },
+    relatedProducts: []
   },
   {
     id: "6",
@@ -174,6 +214,124 @@ export const products: Product[] = [
     additionalImages: [
       "/images/travel-guitar-back.jpg",
       "/images/travel-guitar-detail.jpg"
-    ]
+    ],
+    stock: 10,
+    isNew: true,
+    isFeatured: true,
+    ratings: {
+      average: 4.5,
+      count: 28
+    },
+    relatedProducts: ["1"]
+  },
+  {
+    id: "7",
+    name: "Custom Shop Telecaster",
+    brand: "Fender",
+    category: "Electric",
+    price: 3499,
+    description: "This Custom Shop Telecaster combines vintage aesthetics with modern playability. Hand-crafted by Fender's master builders, it features premium tonewoods and hand-wound pickups for that authentic Telecaster twang with enhanced dynamics and clarity.",
+    features: [
+      "Lightweight Ash Body",
+      "Maple Neck with Rosewood Fingerboard",
+      "Hand-Wound Custom Shop Pickups",
+      "Nitrocellulose Lacquer Finish",
+      "Vintage-Style Hardware"
+    ],
+    specifications: {
+      "Body Wood": "Ash",
+      "Neck Wood": "Maple",
+      "Fingerboard": "Rosewood",
+      "Pickups": "Custom Shop Hand-Wound",
+      "Bridge": "Vintage-Style with Brass Saddles",
+      "Hardware": "Nickel",
+      "Scale Length": "25.5\""
+    },
+    imageUrl: "/images/stratocaster.jpg", // Using placeholder image
+    additionalImages: [
+      "/images/stratocaster-back.jpg", // Using placeholder image
+      "/images/stratocaster-detail.jpg" // Using placeholder image
+    ],
+    stock: 1,
+    isNew: false,
+    isFeatured: false,
+    ratings: {
+      average: 4.9,
+      count: 7
+    },
+    relatedProducts: ["3"]
+  },
+  {
+    id: "8",
+    name: "Grand Auditorium Acoustic-Electric",
+    brand: "Taylor",
+    category: "Acoustic",
+    price: 2799,
+    description: "This Grand Auditorium body shape offers the perfect balance between dreadnought power and concert comfort. Featuring Taylor's Expression System 2 electronics, it delivers studio-quality amplified tone for stage performances while maintaining the rich, natural acoustic sound the brand is known for.",
+    features: [
+      "Sitka Spruce Top",
+      "Hawaiian Koa Back and Sides",
+      "Mahogany Neck with Ebony Fingerboard",
+      "Expression System 2 Electronics",
+      "Venetian Cutaway"
+    ],
+    specifications: {
+      "Body Shape": "Grand Auditorium",
+      "Top Wood": "Sitka Spruce",
+      "Back & Sides": "Hawaiian Koa",
+      "Neck Wood": "Tropical Mahogany",
+      "Fingerboard": "Ebony",
+      "Scale Length": "25.5\"",
+      "Finish": "Gloss"
+    },
+    imageUrl: "/images/acoustic-sunburst.jpg", // Using placeholder image
+    additionalImages: [
+      "/images/acoustic-sunburst-back.jpg", // Using placeholder image
+      "/images/acoustic-sunburst-detail.jpg" // Using placeholder image
+    ],
+    stock: 3,
+    isNew: true,
+    isFeatured: true,
+    ratings: {
+      average: 4.8,
+      count: 16
+    },
+    relatedProducts: ["1", "6"]
   }
 ];
+
+// Helper function to get products by category
+export const getProductsByCategory = (category: string) => {
+  return products.filter(product => 
+    product.category.toLowerCase() === category.toLowerCase()
+  );
+};
+
+// Helper function to get featured products
+export const getFeaturedProducts = () => {
+  return products.filter(product => product.isFeatured);
+};
+
+// Helper function to get new products
+export const getNewProducts = () => {
+  return products.filter(product => product.isNew);
+};
+
+// Helper function to get related products
+export const getRelatedProducts = (productId: string) => {
+  const product = products.find(p => p.id === productId);
+  if (!product || !product.relatedProducts) return [];
+  
+  return products.filter(p => product.relatedProducts?.includes(p.id));
+};
+
+// Helper function to search products
+export const searchProducts = (query: string) => {
+  const searchTerm = query.toLowerCase();
+  return products.filter(product => 
+    product.name.toLowerCase().includes(searchTerm) ||
+    product.brand.toLowerCase().includes(searchTerm) ||
+    product.description.toLowerCase().includes(searchTerm) ||
+    product.category.toLowerCase().includes(searchTerm)
+  );
+};

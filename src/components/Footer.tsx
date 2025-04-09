@@ -1,32 +1,35 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Twitter } from 'lucide-react';
+import { Facebook, Instagram, Twitter, MapPin, Phone, Mail } from 'lucide-react';
 
 const Footer: React.FC = () => {
+  const currentYear = new Date().getFullYear();
+  
   return (
-    <footer className="bg-wood-dark border-t border-gold/20 pt-12 pb-8 wood-texture">
+    <footer className="bg-wood-dark border-t border-gold/20 pt-16 pb-8 wood-texture">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="md:col-span-1">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
+          <div className="md:col-span-4">
             <h3 className="text-2xl font-playfair font-bold text-gold mb-4">TONEWOOD</h3>
-            <p className="text-cream/80 mb-4">
-              Purveyors of fine guitars and musical instruments crafted from the world's finest tonewoods.
+            <p className="text-cream/80 mb-6 max-w-md">
+              Purveyors of fine guitars and musical instruments crafted from the world's 
+              most exceptional tonewoods. Serving musicians with premium instruments since 1985.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-cream hover:text-gold transition-colors">
+              <a href="#" className="bg-wood-medium/50 p-2 rounded-full text-cream hover:text-gold transition-colors">
                 <Facebook size={20} />
               </a>
-              <a href="#" className="text-cream hover:text-gold transition-colors">
+              <a href="#" className="bg-wood-medium/50 p-2 rounded-full text-cream hover:text-gold transition-colors">
                 <Instagram size={20} />
               </a>
-              <a href="#" className="text-cream hover:text-gold transition-colors">
+              <a href="#" className="bg-wood-medium/50 p-2 rounded-full text-cream hover:text-gold transition-colors">
                 <Twitter size={20} />
               </a>
             </div>
           </div>
           
-          <div>
+          <div className="md:col-span-2">
             <h4 className="text-lg font-semibold text-gold-light mb-4">Shop</h4>
             <ul className="space-y-2">
               <li>
@@ -52,7 +55,7 @@ const Footer: React.FC = () => {
             </ul>
           </div>
           
-          <div>
+          <div className="md:col-span-2">
             <h4 className="text-lg font-semibold text-gold-light mb-4">Company</h4>
             <ul className="space-y-2">
               <li>
@@ -78,7 +81,7 @@ const Footer: React.FC = () => {
             </ul>
           </div>
           
-          <div>
+          <div className="md:col-span-2">
             <h4 className="text-lg font-semibold text-gold-light mb-4">Support</h4>
             <ul className="space-y-2">
               <li>
@@ -103,10 +106,35 @@ const Footer: React.FC = () => {
               </li>
             </ul>
           </div>
+          
+          <div className="md:col-span-2">
+            <h4 className="text-lg font-semibold text-gold-light mb-4">Contact Us</h4>
+            <ul className="space-y-3">
+              <li className="flex items-start">
+                <MapPin size={18} className="text-gold mr-2 mt-0.5" />
+                <span className="text-cream/80">
+                  123 Guitar Avenue<br />
+                  Nashville, TN 37203
+                </span>
+              </li>
+              <li className="flex items-start">
+                <Phone size={18} className="text-gold mr-2 mt-0.5" />
+                <span className="text-cream/80">
+                  +1 (615) 555-1234
+                </span>
+              </li>
+              <li className="flex items-start">
+                <Mail size={18} className="text-gold mr-2 mt-0.5" />
+                <span className="text-cream/80">
+                  info@tonewoodguitars.com
+                </span>
+              </li>
+            </ul>
+          </div>
         </div>
         
-        <div className="mt-12 pt-6 border-t border-gold/10 text-center text-cream/60 text-sm">
-          <p>© {new Date().getFullYear()} Tonewood Guitar Emporium. All rights reserved.</p>
+        <div className="pt-8 border-t border-gold/10 text-center text-cream/60 text-sm">
+          <p>© {currentYear} Tonewood Guitar Emporium. All rights reserved.</p>
           <p className="mt-1">This is a demo site. No real purchases will be processed.</p>
         </div>
       </div>

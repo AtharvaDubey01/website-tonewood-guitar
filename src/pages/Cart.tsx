@@ -1,17 +1,44 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ShoppingCart } from 'lucide-react';
+import { ShoppingCart, ShoppingBag, ArrowRight } from 'lucide-react';
 import CartItem from '../components/CartItem';
 import { useCart } from '../context/CartContext';
+import { useToast } from '@/hooks/use-toast';
 
 const Cart = () => {
   const { cartItems, clearCart, getCartTotal } = useCart();
+  const { toast } = useToast();
+  const [couponCode, setCouponCode] = useState('');
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
   
   const cartTotal = getCartTotal();
   const shippingEstimate = cartTotal > 0 ? 25 : 0;
   const taxEstimate = cartTotal * 0.08;
   const orderTotal = cartTotal + shippingEstimate + taxEstimate;
+  
+  const handleApplyCoupon = () => {
+    if (couponCode.trim()) {
+      toast({
+        title: "Invalid coupon",
+        description: `The coupon code "${couponCode}" is not valid or has expired.`,
+      });
+      setCouponCode('');
+    }
+  };
+  
+  const handleCheckout = () => {
+    setIsCheckingOut(true);
+    
+    setTimeout(() => {
+      toast({
+        title: "Checkout successful",
+        description: "This is a demo. In a real app, you would be redirected to a payment processor.",
+      });
+      clearCart();
+      setIsCheckingOut(false);
+    }, 1500);
+  };
   
   return (
     <main className="py-12">
@@ -21,20 +48,50 @@ const Cart = () => {
         {cartItems.length > 0 ? (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
-              {cartItems.map((item) => (
-                <CartItem key={item.product.id} item={item} />
-              ))}
+              <div className="glass-card rounded-lg p-6 mb-6">
+                <h2 className="text-xl font-playfair text-gold mb-4">
+                  Cart Items ({cartItems.reduce((acc, item) => acc + item.quantity, 0)})
+                </h2>
+                
+                {cartItems.map((item) => (
+                  <CartItem key={item.product.id} item={item} />
+                ))}
+                
+                <div className="mt-6 flex justify-between">
+                  <button 
+                    onClick={clearCart}
+                    className="text-cream/70 hover:text-destructive transition-colors"
+                  >
+                    Clear Cart
+                  </button>
+                  <Link to="/shop" className="text-cream/70 hover:text-gold transition-colors flex items-center gap-1">
+                    Continue Shopping
+                    <ArrowRight size={16} />
+                  </Link>
+                </div>
+              </div>
               
-              <div className="mt-6 flex justify-between">
-                <button 
-                  onClick={clearCart}
-                  className="text-cream/70 hover:text-destructive transition-colors"
-                >
-                  Clear Cart
-                </button>
-                <Link to="/shop" className="text-cream/70 hover:text-gold transition-colors">
-                  Continue Shopping
-                </Link>
+              <div className="glass-card rounded-lg p-6">
+                <h2 className="text-xl font-playfair text-gold mb-4">Have a Coupon?</h2>
+                <div className="flex">
+                  <input
+                    type="text"
+                    value={couponCode}
+                    onChange={(e) => setCouponCode(e.target.value)}
+                    placeholder="Enter coupon code"
+                    className="flex-1 px-4 py-2 rounded-l-md bg-wood-medium/50 border border-gold/20 text-cream focus:border-gold focus:outline-none"
+                  />
+                  <button 
+                    onClick={handleApplyCoupon}
+                    className="btn-primary rounded-l-none"
+                    disabled={!couponCode.trim()}
+                  >
+                    Apply
+                  </button>
+                </div>
+                <p className="text-xs text-cream/50 mt-2">
+                  Enter a valid coupon code if you have one. Demo coupon: TONEWOOD10
+                </p>
               </div>
             </div>
             
@@ -60,9 +117,43 @@ const Cart = () => {
                 </div>
               </div>
               
-              <button className="btn-primary w-full">
-                Proceed to Checkout
+              <button 
+                className={`btn-primary w-full flex items-center justify-center gap-2 ${
+                  isCheckingOut ? 'opacity-70 cursor-wait' : ''
+                }`}
+                onClick={handleCheckout}
+                disabled={isCheckingOut}
+              >
+                {isCheckingOut ? (
+                  <>
+                    <div className="h-4 w-4 border-2 border-t-transparent border-wood-dark rounded-full animate-spin"></div>
+                    Processing...
+                  </>
+                ) : (
+                  <>
+                    <ShoppingBag size={18} />
+                    Proceed to Checkout
+                  </>
+                )}
               </button>
+              
+              <div className="mt-6">
+                <h3 className="text-sm font-medium text-cream mb-2">We Accept</h3>
+                <div className="flex gap-2">
+                  <div className="bg-white/80 rounded px-2 py-1">
+                    <span className="text-xs text-wood-dark font-semibold">VISA</span>
+                  </div>
+                  <div className="bg-white/80 rounded px-2 py-1">
+                    <span className="text-xs text-wood-dark font-semibold">MASTERCARD</span>
+                  </div>
+                  <div className="bg-white/80 rounded px-2 py-1">
+                    <span className="text-xs text-wood-dark font-semibold">AMEX</span>
+                  </div>
+                  <div className="bg-white/80 rounded px-2 py-1">
+                    <span className="text-xs text-wood-dark font-semibold">PAYPAL</span>
+                  </div>
+                </div>
+              </div>
               
               <p className="text-xs text-center text-cream/50 mt-4">
                 This is a demo site. No real purchases will be processed.

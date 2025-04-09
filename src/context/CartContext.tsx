@@ -2,7 +2,7 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { CartItem } from '../types/cart';
 import { Product } from '../types/product';
-import { useToast } from '@/components/ui/use-toast';
+import { useToast } from '@/hooks/use-toast';
 
 interface CartContextType {
   cartItems: CartItem[];
@@ -12,6 +12,7 @@ interface CartContextType {
   decreaseQuantity: (productId: string) => void;
   clearCart: () => void;
   getCartTotal: () => number;
+  getCartCount: () => number;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -30,7 +31,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   // Load cart from localStorage on component mount
   useEffect(() => {
-    const savedCart = localStorage.getItem('cart');
+    const savedCart = localStorage.getItem('tonewood_cart');
     if (savedCart) {
       try {
         setCartItems(JSON.parse(savedCart));
@@ -42,12 +43,21 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   // Save cart to localStorage whenever it changes
   useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cartItems));
+    localStorage.setItem('tonewood_cart', JSON.stringify(cartItems));
   }, [cartItems]);
 
   const addToCart = (product: Product) => {
     setCartItems(prevItems => {
       const existingItem = prevItems.find(item => item.product.id === product.id);
+      
+      // Check if adding another item would exceed stock
+      if (existingItem && existingItem.quantity >= (product.stock || 0)) {
+        toast({
+          title: "Stock limit reached",
+          description: `Sorry, we only have ${product.stock} of this item in stock.`,
+        });
+        return prevItems;
+      }
       
       if (existingItem) {
         // Increase quantity if item already exists
@@ -61,25 +71,36 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         return [...prevItems, { product, quantity: 1 }];
       }
     });
-
-    toast({
-      title: "Added to cart",
-      description: `${product.name} has been added to your cart.`,
-    });
   };
 
   const removeFromCart = (productId: string) => {
     setCartItems(prevItems => prevItems.filter(item => item.product.id !== productId));
+    
+    toast({
+      title: "Item removed",
+      description: "Item has been removed from your cart.",
+    });
   };
 
   const increaseQuantity = (productId: string) => {
-    setCartItems(prevItems => 
-      prevItems.map(item => 
+    setCartItems(prevItems => {
+      const item = prevItems.find(item => item.product.id === productId);
+      
+      // Check if increasing would exceed stock
+      if (item && item.quantity >= (item.product.stock || 0)) {
+        toast({
+          title: "Stock limit reached",
+          description: `Sorry, we only have ${item.product.stock} of this item in stock.`,
+        });
+        return prevItems;
+      }
+      
+      return prevItems.map(item => 
         item.product.id === productId 
           ? { ...item, quantity: item.quantity + 1 }
           : item
-      )
-    );
+      );
+    });
   };
 
   const decreaseQuantity = (productId: string) => {
@@ -110,6 +131,13 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     );
   };
 
+  const getCartCount = () => {
+    return cartItems.reduce(
+      (count, item) => count + item.quantity, 
+      0
+    );
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -120,6 +148,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         decreaseQuantity,
         clearCart,
         getCartTotal,
+        getCartCount,
       }}
     >
       {children}

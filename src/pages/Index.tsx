@@ -2,13 +2,18 @@
 import React from 'react';
 import Hero from '../components/Hero';
 import FeaturedProducts from '../components/FeaturedProducts';
-import { products } from '../data/products';
+import CategoryPreview from '../components/CategoryPreview';
+import { categories } from '../data/categories';
+import { getFeaturedProducts } from '../data/products';
 
 const Index = () => {
+  const featuredProducts = getFeaturedProducts();
+  
   return (
     <main>
       <Hero />
-      <FeaturedProducts products={products} />
+      <CategoryPreview categories={categories} />
+      <FeaturedProducts products={featuredProducts} />
       
       <section className="py-20 bg-wood-medium/30 wood-texture">
         <div className="container mx-auto px-4">
@@ -56,7 +61,7 @@ const Index = () => {
                 share our passion for excellence, bringing you guitars with character, 
                 voice, and impeccable playability.
               </p>
-              <button className="btn-primary">Discover Our Story</button>
+              <Link to="/about" className="btn-primary">Discover Our Story</Link>
             </div>
             <div className="glass-card rounded-lg overflow-hidden">
               <img 
