@@ -1,4 +1,3 @@
-
 import { Product } from '../types/product';
 
 export const products: Product[] = [
@@ -25,10 +24,10 @@ export const products: Product[] = [
       "Scale Length": "25.4\"",
       "Finish": "Gloss Nitrocellulose Sunburst"
     },
-    imageUrl: "/images/acoustic-sunburst.jpg",
+    imageUrl: "https://images.unsplash.com/photo-1564186763535-ebb21ef5277f",
     additionalImages: [
-      "/images/acoustic-sunburst-back.jpg",
-      "/images/acoustic-sunburst-detail.jpg"
+      "https://images.unsplash.com/photo-1550985616-10810253b84d",
+      "https://images.unsplash.com/photo-1550985616-577f068232c3"
     ],
     stock: 5,
     isNew: false,
@@ -62,10 +61,10 @@ export const products: Product[] = [
       "Hardware": "Gold",
       "Scale Length": "24.75\""
     },
-    imageUrl: "/images/les-paul-custom.jpg",
+    imageUrl: "https://images.unsplash.com/photo-1609081219090-a6d81d3085bf",
     additionalImages: [
-      "/images/les-paul-custom-back.jpg",
-      "/images/les-paul-custom-detail.jpg"
+      "https://images.unsplash.com/photo-1516924962500-2b4b3b99ea02",
+      "https://images.unsplash.com/photo-1607228081886-3b65dd7abfda"
     ],
     stock: 2,
     isNew: true,
@@ -99,10 +98,10 @@ export const products: Product[] = [
       "Hardware": "Nickel/Chrome",
       "Scale Length": "25.5\""
     },
-    imageUrl: "/images/stratocaster.jpg",
+    imageUrl: "https://images.unsplash.com/photo-1606046604972-77cc76aee944",
     additionalImages: [
-      "/images/stratocaster-back.jpg",
-      "/images/stratocaster-detail.jpg"
+      "https://images.unsplash.com/photo-1563298723-dcfebaa392e3",
+      "https://images.unsplash.com/photo-1596800815946-95a3129bf376"
     ],
     stock: 8,
     isNew: false,
@@ -136,10 +135,10 @@ export const products: Product[] = [
       "Scale Length": "650mm",
       "Finish": "French Polish"
     },
-    imageUrl: "/images/classical-guitar.jpg",
+    imageUrl: "https://images.unsplash.com/photo-1588449668365-d15ef36a45d9",
     additionalImages: [
-      "/images/classical-guitar-back.jpg",
-      "/images/classical-guitar-detail.jpg"
+      "https://images.unsplash.com/photo-1590212680848-58c96fb49940",
+      "https://images.unsplash.com/photo-1605020420620-20c943cc4669"
     ],
     stock: 3,
     isNew: false,
@@ -173,10 +172,10 @@ export const products: Product[] = [
       "Hardware": "Nickel/Chrome",
       "Scale Length": "34\""
     },
-    imageUrl: "/images/jazz-bass.jpg",
+    imageUrl: "https://images.unsplash.com/photo-1613273481196-92033a5b5d3f",
     additionalImages: [
-      "/images/jazz-bass-back.jpg",
-      "/images/jazz-bass-detail.jpg"
+      "https://images.unsplash.com/photo-1612225396934-e4ec99fe2141",
+      "https://images.unsplash.com/photo-1583744529672-6e511cad7e7b"
     ],
     stock: 4,
     isNew: true,
@@ -210,10 +209,10 @@ export const products: Product[] = [
       "Scale Length": "22.75\"",
       "Finish": "Varnish"
     },
-    imageUrl: "/images/travel-guitar.jpg",
+    imageUrl: "https://images.unsplash.com/photo-1587166088097-dbb3ece3242f",
     additionalImages: [
-      "/images/travel-guitar-back.jpg",
-      "/images/travel-guitar-detail.jpg"
+      "https://images.unsplash.com/photo-1568193755668-aae18714a9f1",
+      "https://images.unsplash.com/photo-1588143407953-d5b631683309"
     ],
     stock: 10,
     isNew: true,
@@ -247,10 +246,10 @@ export const products: Product[] = [
       "Hardware": "Nickel",
       "Scale Length": "25.5\""
     },
-    imageUrl: "/images/stratocaster.jpg", // Using placeholder image
+    imageUrl: "https://images.unsplash.com/photo-1554998171-706e730d721d",
     additionalImages: [
-      "/images/stratocaster-back.jpg", // Using placeholder image
-      "/images/stratocaster-detail.jpg" // Using placeholder image
+      "https://images.unsplash.com/photo-1525032430132-d7e8333018d9",
+      "https://images.unsplash.com/photo-1583744604664-73392ef5d9c1"
     ],
     stock: 1,
     isNew: false,
@@ -284,10 +283,10 @@ export const products: Product[] = [
       "Scale Length": "25.5\"",
       "Finish": "Gloss"
     },
-    imageUrl: "/images/acoustic-sunburst.jpg", // Using placeholder image
+    imageUrl: "https://images.unsplash.com/photo-1550985543-83c49d23a241",
     additionalImages: [
-      "/images/acoustic-sunburst-back.jpg", // Using placeholder image
-      "/images/acoustic-sunburst-detail.jpg" // Using placeholder image
+      "https://images.unsplash.com/photo-1550985546-54a63f98cf5d",
+      "https://images.unsplash.com/photo-1550985548-65aaab303252"
     ],
     stock: 3,
     isNew: true,
