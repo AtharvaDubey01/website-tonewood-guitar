@@ -19,7 +19,7 @@ const NavMenu = () => {
     <NavigationMenu className="hidden md:flex">
       <NavigationMenuList>
         <NavigationMenuItem>
-          <Link to="/" legacyBehavior passHref>
+          <Link to="/">
             <NavigationMenuLink
               className={cn(
                 "flex items-center text-cream hover:text-gold transition-colors px-3 py-2",
@@ -104,7 +104,7 @@ const NavMenu = () => {
         </NavigationMenuItem>
         
         <NavigationMenuItem>
-          <Link to="/about" legacyBehavior passHref>
+          <Link to="/about">
             <NavigationMenuLink
               className={cn(
                 "flex items-center text-cream hover:text-gold transition-colors px-3 py-2",
@@ -117,7 +117,7 @@ const NavMenu = () => {
         </NavigationMenuItem>
         
         <NavigationMenuItem>
-          <Link to="/contact" legacyBehavior passHref>
+          <Link to="/contact">
             <NavigationMenuLink
               className={cn(
                 "flex items-center text-cream hover:text-gold transition-colors px-3 py-2",
